@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 Random Fact</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --bg-color: #f7f5fb;
+      --card-bg: #ffffff;
+      --text-color: #4a4a68;
+      --primary-pastel: #d8b4fe; 
+      --primary-hover: #c084fc;
+      --secondary-pastel: #e0f2fe; 
+      --accent-pastel: #fbcfe8;
+      --border-color: #e2e8f0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #3b0764;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: var(--text-color);
+      font-size: 0.95rem;
+      margin-left: 1.5rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav button:hover {
+      color: #7e22ce;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .section {
+      display: none;
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-pastel);
+      color: #3b0764;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    #home h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    #home p {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .race-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+
+    .race-details h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .race-details p {
+      margin-bottom: 0.8rem;
+      color: #64748b;
+    }
+
+    .track-map {
+      width: 160px;
+      height: 100px;
+      border: 2px dashed var(--primary-pastel);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a855f7;
+      font-weight: 500;
+      background-color: var(--secondary-pastel);
+    }
+
+    .fact-box {
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .fact-text {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .fact-counter {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+
+    .about-content {
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .about-content h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-content hr {
+      border: 0;
+      height: 1px;
+      background: var(--border-color);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">F1 Random Fact</div>
+    <nav>
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('proxima-corrida')">Próxima Corrida</button>
+      <button onclick="showSection('curiosidades')">Curiosidades</button>
+      <button onclick="showSection('sobre')">Sobre</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="section active">
+      <h1>F1 RANDOM FACT</h1>
+      <p>Curiosidades aleatórias sobre a Fórmula 1.<br>Divertido, Informativo e Rápido.</p>
+      <button class="btn-primary" onclick="showSection('curiosidades')">Gerar Curiosidade Aleatória</button>
+    </section>
+
+    <section id="proxima-corrida" class="section">
+      <h2 style="margin-bottom: 1.5rem;">PRÓXIMA CORRIDA</h2>
+      <div class="card race-info">
+        <div class="race-details">
+          <h3>GRANDE PRÊMIO DO CANADÁ</h3>
+          <p>Circuito Gilles Villeneuve, Montreal</p>
+          <p>📅 14 de Junho de 2026</p>
+          <p>📍 Montreal, Canadá</p>
+        </div>
+        <div class="track-map">
+          [ Mapa do Circuito ]
+        </div>
+      </div>
+      <button class="btn-primary" onclick="showSection('curiosidades')">Ver Curiosidades</button>
+    </section>
+
+    <section id="curiosidades" class="section">
+      <h2 style="margin-bottom: 1.5rem;">CURIOSIDADE ALEATÓRIA</h2>
+      <div class="card fact-box">
+        <p class="fact-text" id="fact-display">Clique no botão abaixo para gerar uma curiosidade!</p>
+        <span class="fact-counter" id="fact-counter">0 / 10</span>
+      </div>
+      <button class="btn-primary" onclick="generateRandomFact()">Gerar Nova Curiosidade</button>
+    </section>
+
+    <section id="sobre" class="section">
+      <div class="card about-content">
+        <h2>SOBRE O PROJETO</h2>
+        <p>O <strong>F1 Random Fact</strong> é um site criado para fãs da Fórmula 1 que querem aprender mais sobre cada corrida de forma divertida e rápida. A ideia é mostrar curiosidades aleatórias sobre os Grandes Prêmios, pilotos, circuitos e momentos marcantes da história da F1. Aperte o botão e descubra algo novo sobre o mundo da velocidade! O projeto é</p>
+        <hr>
+        <h3>CONTATO</h3>
+        <p style="margin-top: 0.5rem;">Email de suporte: <strong>suporte@f1randomfact-lucas.com</strong></p>
+        <p>Dúvidas, sugestões ou feedback? Entre em contato conosco!</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const curiosidades = [
+      "O GP do Canadá é disputado no Circuito Gilles Villeneuve, nomeado em homenagem ao lendário piloto canadense.",
+      "Um carro de Fórmula 1 pode andar de cabeça para baixo em um teto se atingir velocidade suficiente, devido à força aerodinâmica (downforce).",
+      "Os pilotos de F1 podem perder até 4 kg de peso corporal durante uma única corrida devido ao calor e ao esforço físico.",
+      "Os pneus de F1 operam em temperaturas ideais acima de 100°C para garantir a máxima aderência no asfalto.",
+      "A troca de pneus mais rápida da história da F1 durou apenas 1.80 segundo (McLaren, GP do Catar de 2023).",
+      "Um capacete de Fórmula 1 é submetido a testes extremos, incluindo chamas a 800°C por vários segundos antes de ser homologado.",
+      "O volante de um F1 moderno possui mais de 20 botões e seletores para controlar quase todas as funções do carro.",
+      "Michael Schumacher e Lewis Hamilton mantêm o recorde empatado de 7 títulos mundiais de Fórmula 1 cada.",
+      "O GP de Mônaco é a corrida mais curta do calendário em distância total (260 km), mas uma das mais exigentes.",
+      "Os freios de disco de carbono de um F1 podem atingir temperaturas superiores a 1.000°C durante frenagens intensas."
+    ];
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const targetSection = document.getElementById(sectionId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      const factText = document.getElementById('fact-display');
+      if (sectionId === 'curiosidades' && factText && factText.innerText.includes('Clique no botão')) {
+        generateRandomFact();
+      }
+    }
+
+    function generateRandomFact() {
+      const randomIndex = Math.floor(Math.random() * curiosidades.length);
+      const selectedFact = curiosidades[randomIndex];
+
+      const factDisplay = document.getElementById('fact-display');
+      const factCounter = document.getElementById('fact-counter');
+
+      if (factDisplay && factCounter) {
+        factDisplay.innerText = selectedFact;
+        factCounter.innerText = `${randomIndex + 1} / ${curiosidades.length}`;
+      }
+    }
+  </script>
+</body>
+</html>
