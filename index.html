@@ -1,9 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Curiosidades aleatórias e informações sobre a próxima corrida da Fórmula 1.">
   <title>F1 Random Fact</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -14,17 +17,15 @@
 
     :root {
       --bg-color: #f7f5fb;
-      --card-bg: #ffffff;
+      --card-bg: #fff;
       --text-color: #4a4a68;
-      --primary-pastel: #d8b4fe; 
+      --primary-pastel: #d8b4fe;
       --primary-hover: #c084fc;
-      --secondary-pastel: #e0f2fe; 
-      --accent-pastel: #fbcfe8;
       --border-color: #e2e8f0;
     }
 
     body {
-      background-color: var(--bg-color);
+      background: var(--bg-color);
       color: var(--text-color);
       display: flex;
       flex-direction: column;
@@ -32,29 +33,36 @@
     }
 
     header {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border-bottom: 1px solid var(--border-color);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
     }
 
     .logo {
       font-size: 1.25rem;
-      font-weight: bold;
+      font-weight: 800;
       color: #3b0764;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
     }
 
     nav button {
       background: none;
-      border: none;
+      border: 0;
       color: var(--text-color);
-      font-size: 0.95rem;
-      margin-left: 1.5rem;
+      font-size: .95rem;
+      padding: .5rem .65rem;
       cursor: pointer;
-      font-weight: 500;
-      transition: color 0.2s;
+      font-weight: 600;
     }
 
     nav button:hover {
@@ -72,7 +80,7 @@
     .section {
       display: none;
       width: 100%;
-      max-width: 700px;
+      max-width: 850px;
       text-align: center;
     }
 
@@ -81,38 +89,33 @@
     }
 
     .card {
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 2.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,.05);
       margin-bottom: 1.5rem;
     }
 
     .btn-primary {
-      background-color: var(--primary-pastel);
+      background: var(--primary-pastel);
       color: #3b0764;
-      border: none;
-      padding: 0.8rem 1.8rem;
-      font-size: 0.95rem;
-      font-weight: 600;
+      border: 0;
+      padding: .8rem 1.8rem;
+      font-size: .95rem;
+      font-weight: 700;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.2s, transform 0.1s;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: .5px;
     }
 
     .btn-primary:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .btn-primary:active {
-      transform: scale(0.98);
+      background: var(--primary-hover);
     }
 
     #home h1 {
-      font-size: 2.2rem;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
       margin-bottom: 1rem;
       letter-spacing: 1px;
     }
@@ -123,55 +126,89 @@
       margin-bottom: 2rem;
     }
 
-    .race-info {
-      display: flex;
-      justify-content: space-between;
+    /* Próxima corrida */
+
+    .race-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+      gap: 1.5rem;
       align-items: center;
       text-align: left;
     }
 
     .race-details h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.35rem;
+      margin-bottom: .75rem;
+      color: #3b0764;
     }
 
     .race-details p {
-      margin-bottom: 0.8rem;
+      margin-bottom: .65rem;
       color: #64748b;
+      line-height: 1.5;
     }
 
     .track-map {
-      width: 160px;
-      height: 100px;
-      border: 2px dashed var(--primary-pastel);
-      border-radius: 8px;
+      min-height: 210px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #a855f7;
-      font-weight: 500;
-      background-color: var(--secondary-pastel);
+      padding: 1rem;
+      background: #f8fafc;
+      overflow: hidden;
     }
 
+    .track-map img {
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      height: 210px;
+      object-fit: contain;
+    }
+
+    .track-placeholder {
+      text-align: center;
+      color: #64748b;
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .status {
+      font-size: .9rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+      min-height: 1.3em;
+    }
+
+    .status.error {
+      color: #b91c1c;
+    }
+
+    /* Curiosidades */
+
     .fact-box {
-      min-height: 120px;
+      min-height: 150px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 1rem;
     }
 
     .fact-text {
       font-size: 1.15rem;
-      line-height: 1.5;
-      margin-bottom: 1.5rem;
+      line-height: 1.6;
     }
 
     .fact-counter {
-      font-size: 0.85rem;
+      font-size: .85rem;
       color: #94a3b8;
-      font-weight: 600;
+      font-weight: 700;
     }
+
+    /* Sobre */
 
     .about-content {
       text-align: left;
@@ -189,105 +226,624 @@
       background: var(--border-color);
       margin: 1.5rem 0;
     }
+
+    /* Responsividade */
+
+    @media (max-width: 650px) {
+      header {
+        padding: 1rem;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      nav button {
+        font-size: .88rem;
+      }
+
+      main {
+        padding: 1.2rem;
+      }
+
+      .card {
+        padding: 1.3rem;
+      }
+
+      .race-card {
+        grid-template-columns: 1fr;
+      }
+
+      .track-map {
+        min-height: 180px;
+      }
+
+      .track-map img {
+        height: 180px;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <header>
     <div class="logo">F1 Random Fact</div>
-    <nav>
-      <button onclick="showSection('home')">Home</button>
-      <button onclick="showSection('proxima-corrida')">Próxima Corrida</button>
-      <button onclick="showSection('curiosidades')">Curiosidades</button>
-      <button onclick="showSection('sobre')">Sobre</button>
+
+    <nav aria-label="Navegação principal">
+      <button type="button" onclick="showSection('home')">Home</button>
+      <button type="button" onclick="showSection('proxima-corrida')">
+        Próxima Corrida
+      </button>
+      <button type="button" onclick="showSection('curiosidades')">
+        Curiosidades
+      </button>
+      <button type="button" onclick="showSection('sobre')">Sobre</button>
     </nav>
   </header>
 
   <main>
+
+    <!-- HOME -->
+
     <section id="home" class="section active">
       <h1>F1 RANDOM FACT</h1>
-      <p>Curiosidades aleatórias sobre a Fórmula 1.<br>Divertido, Informativo e Rápido.</p>
-      <button class="btn-primary" onclick="showSection('curiosidades')">Gerar Curiosidade Aleatória</button>
+
+      <p>
+        Curiosidades aleatórias sobre a Fórmula 1.<br>
+        Divertido, informativo e rápido.
+      </p>
+
+      <button
+        class="btn-primary"
+        type="button"
+        onclick="showSection('curiosidades')">
+        Gerar Curiosidade Aleatória
+      </button>
     </section>
+
+    <!-- PRÓXIMA CORRIDA -->
 
     <section id="proxima-corrida" class="section">
-      <h2 style="margin-bottom: 1.5rem;">PRÓXIMA CORRIDA</h2>
-      <div class="card race-info">
-        <div class="race-details">
-          <h3>GRANDE PRÊMIO DO CANADÁ</h3>
-          <p>Circuito Gilles Villeneuve, Montreal</p>
-          <p>📅 14 de Junho de 2026</p>
-          <p>📍 Montreal, Canadá</p>
+
+      <h2 style="margin-bottom: 1.5rem;">
+        PRÓXIMA CORRIDA
+      </h2>
+
+      <p id="race-status" class="status" role="status" aria-live="polite">
+        Buscando a próxima corrida...
+      </p>
+
+      <div class="card race-card">
+
+        <div class="race-details" aria-live="polite">
+
+          <h3 id="race-name">
+            Carregando Grande Prêmio...
+          </h3>
+
+          <p id="race-circuit">
+            Consultando circuito...
+          </p>
+
+          <p id="race-date">
+            📅 Data: carregando...
+          </p>
+
+          <p id="race-location">
+            📍 Localização: carregando...
+          </p>
+
+          <p id="race-time">
+            🕒 Horário: carregando...
+          </p>
+
         </div>
-        <div class="track-map">
-          [ Mapa do Circuito ]
+
+        <div class="track-map" id="track-container">
+          <p class="track-placeholder">
+            Carregando traçado do circuito...
+          </p>
         </div>
+
       </div>
-      <button class="btn-primary" onclick="showSection('curiosidades')">Ver Curiosidades</button>
+
+      <button
+        class="btn-primary"
+        type="button"
+        onclick="showSection('curiosidades')">
+        Ver Curiosidades
+      </button>
+
     </section>
+
+    <!-- CURIOSIDADES -->
 
     <section id="curiosidades" class="section">
-      <h2 style="margin-bottom: 1.5rem;">CURIOSIDADE ALEATÓRIA</h2>
+
+      <h2 style="margin-bottom: 1.5rem;">
+        CURIOSIDADE ALEATÓRIA
+      </h2>
+
       <div class="card fact-box">
-        <p class="fact-text" id="fact-display">Clique no botão abaixo para gerar uma curiosidade!</p>
-        <span class="fact-counter" id="fact-counter">0 / 10</span>
+
+        <p class="fact-text" id="fact-display">
+          Clique no botão abaixo para gerar uma curiosidade!
+        </p>
+
+        <span class="fact-counter" id="fact-counter">
+          0 visualizações
+        </span>
+
       </div>
-      <button class="btn-primary" onclick="generateRandomFact()">Gerar Nova Curiosidade</button>
+
+      <button
+        class="btn-primary"
+        type="button"
+        onclick="generateRandomFact()">
+        Gerar Nova Curiosidade
+      </button>
+
     </section>
 
+    <!-- SOBRE -->
+
     <section id="sobre" class="section">
+
       <div class="card about-content">
+
         <h2>SOBRE O PROJETO</h2>
-        <p>O <strong>F1 Random Fact</strong> é um site criado para fãs da Fórmula 1 que querem aprender mais sobre cada corrida de forma divertida e rápida. A ideia é mostrar curiosidades aleatórias sobre os Grandes Prêmios, pilotos, circuitos e momentos marcantes da história da F1. Aperte o botão e descubra algo novo sobre o mundo da velocidade! O projeto é</p>
+
+        <p>
+          O <strong>F1 Random Fact</strong> é um site criado para fãs da
+          Fórmula 1 que querem aprender mais sobre cada corrida de forma
+          divertida e rápida. A ideia é mostrar curiosidades aleatórias
+          sobre os Grandes Prêmios, pilotos, circuitos e momentos marcantes
+          da história da F1.
+        </p>
+
         <hr>
+
         <h3>CONTATO</h3>
-        <p style="margin-top: 0.5rem;">Email de suporte: <strong>suporte@f1randomfact-lucas.com</strong></p>
+
+         <p style="margin-top: 0.5rem;">Email de suporte: <strong>suporte@f1randomfact-lucas.com</strong></p>
         <p>Dúvidas, sugestões ou feedback? Entre em contato conosco!</p>
+
       </div>
+
     </section>
+
   </main>
 
   <script>
+
+    // ==========================================
+    // CONFIGURAÇÕES
+    // ==========================================
+
+    const API_NEXT_RACE =
+      'https://api.jolpi.ca/ergast/f1/current/next.json';
+
+
+    // Mapeamento entre o circuitId da Jolpica
+    // e o nome utilizado nos arquivos SVG.
+
+    const CIRCUIT_FILE_NAMES = {
+
+      albert_park: 'albert-park',
+      shanghai: 'shanghai',
+      suzuka: 'suzuka',
+      bahrain: 'bahrain',
+      jeddah: 'jeddah',
+      miami: 'miami',
+      imola: 'imola',
+      monaco: 'monaco',
+      catalunya: 'catalunya',
+      villeneuve: 'gilles-villeneuve',
+      red_bull_ring: 'red-bull-ring',
+      silverstone: 'silverstone',
+      spa: 'spa-francorchamps',
+      hungaroring: 'hungaroring',
+      zandvoort: 'zandvoort',
+      monza: 'monza',
+      baku: 'baku',
+      marina_bay: 'marina-bay',
+      americas: 'circuit-of-the-americas',
+      rodriguez: 'hermanos-rodriguez',
+      interlagos: 'interlagos',
+      vegas: 'las-vegas',
+      losail: 'losail',
+      yas_marina: 'yas-marina',
+      madrid: 'madring'
+
+    };
+
+
+    // ==========================================
+    // CURIOSIDADES
+    // ==========================================
+
     const curiosidades = [
-      "O GP do Canadá é disputado no Circuito Gilles Villeneuve, nomeado em homenagem ao lendário piloto canadense.",
-      "Um carro de Fórmula 1 pode andar de cabeça para baixo em um teto se atingir velocidade suficiente, devido à força aerodinâmica (downforce).",
-      "Os pilotos de F1 podem perder até 4 kg de peso corporal durante uma única corrida devido ao calor e ao esforço físico.",
-      "Os pneus de F1 operam em temperaturas ideais acima de 100°C para garantir a máxima aderência no asfalto.",
-      "A troca de pneus mais rápida da história da F1 durou apenas 1.80 segundo (McLaren, GP do Catar de 2023).",
-      "Um capacete de Fórmula 1 é submetido a testes extremos, incluindo chamas a 800°C por vários segundos antes de ser homologado.",
-      "O volante de um F1 moderno possui mais de 20 botões e seletores para controlar quase todas as funções do carro.",
-      "Michael Schumacher e Lewis Hamilton mantêm o recorde empatado de 7 títulos mundiais de Fórmula 1 cada.",
-      "O GP de Mônaco é a corrida mais curta do calendário em distância total (260 km), mas uma das mais exigentes.",
-      "Os freios de disco de carbono de um F1 podem atingir temperaturas superiores a 1.000°C durante frenagens intensas."
+
+      'O GP do Canadá é disputado no Circuito Gilles Villeneuve, nomeado em homenagem ao lendário piloto canadense.',
+
+      'Um carro de Fórmula 1 pode gerar força aerodinâmica suficiente para produzir uma carga vertical muito elevada em alta velocidade.',
+
+      'Os pilotos de F1 enfrentam temperaturas elevadas e forças físicas intensas durante uma corrida.',
+
+      'Os pneus de F1 são desenvolvidos para funcionar em faixas específicas de temperatura e oferecer aderência.',
+
+      'A McLaren realizou uma parada de 1,80 segundo no GP do Catar de 2023, um dos pit stops mais rápidos já registrados.',
+
+      'Os capacetes dos pilotos passam por rigorosos testes de segurança antes de serem homologados.',
+
+      'O volante de um F1 moderno reúne diversos comandos para controlar funções do carro.',
+
+      'Michael Schumacher e Lewis Hamilton conquistaram sete títulos mundiais cada.',
+
+      'O GP de Mônaco é conhecido por seu traçado estreito e por exigir muita precisão dos pilotos.',
+
+      'Os freios de carbono de um F1 podem atingir temperaturas extremamente elevadas durante a corrida.'
+
     ];
 
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(section => section.classList.remove('active'));
 
-      const targetSection = document.getElementById(sectionId);
-      if (targetSection) {
-        targetSection.classList.add('active');
+    let lastFactIndex = -1;
+    let factsViewed = 0;
+
+
+    // ==========================================
+    // NAVEGAÇÃO
+    // ==========================================
+
+    function showSection(sectionId) {
+
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      const target = document.getElementById(sectionId);
+
+      if (target) {
+        target.classList.add('active');
       }
 
       const factText = document.getElementById('fact-display');
-      if (sectionId === 'curiosidades' && factText && factText.innerText.includes('Clique no botão')) {
+
+      if (
+        sectionId === 'curiosidades' &&
+        factText.textContent.includes('Clique no botão')
+      ) {
         generateRandomFact();
       }
+
+      if (
+        sectionId === 'proxima-corrida' &&
+        !window.raceRequestStarted
+      ) {
+        loadNextRace();
+      }
+
     }
+
+
+    // ==========================================
+    // SORTEIO DAS CURIOSIDADES
+    // ==========================================
 
     function generateRandomFact() {
-      const randomIndex = Math.floor(Math.random() * curiosidades.length);
-      const selectedFact = curiosidades[randomIndex];
 
-      const factDisplay = document.getElementById('fact-display');
-      const factCounter = document.getElementById('fact-counter');
+      let index;
 
-      if (factDisplay && factCounter) {
-        factDisplay.innerText = selectedFact;
-        factCounter.innerText = `${randomIndex + 1} / ${curiosidades.length}`;
-      }
+      do {
+
+        index = Math.floor(Math.random() * curiosidades.length);
+
+      } while (
+        curiosidades.length > 1 &&
+        index === lastFactIndex
+      );
+
+      lastFactIndex = index;
+
+      factsViewed++;
+
+      document.getElementById('fact-display').textContent =
+        curiosidades[index];
+
+      document.getElementById('fact-counter').textContent =
+        `${factsViewed} ${
+          factsViewed === 1 ? 'visualização' : 'visualizações'
+        }`;
+
     }
+
+
+    // ==========================================
+    // FORMATAÇÃO DA DATA
+    // ==========================================
+
+    function formatRaceDate(dateString) {
+
+      const date = new Date(`${dateString}T12:00:00Z`);
+
+      if (Number.isNaN(date.getTime())) {
+        return dateString;
+      }
+
+      return new Intl.DateTimeFormat('pt-BR', {
+
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        timeZone: 'UTC'
+
+      }).format(date);
+
+    }
+
+
+    // ==========================================
+    // FORMATAÇÃO DO HORÁRIO
+    // ==========================================
+
+    function formatRaceTime(dateString, timeString) {
+
+      if (!timeString) {
+        return 'Horário ainda não divulgado';
+      }
+
+      const date = new Date(`${dateString}T${timeString}`);
+
+      if (Number.isNaN(date.getTime())) {
+        return 'Horário indisponível';
+      }
+
+      return new Intl.DateTimeFormat('pt-BR', {
+
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: Intl.DateTimeFormat()
+          .resolvedOptions().timeZone,
+        timeZoneName: 'short'
+
+      }).format(date);
+
+    }
+
+
+    // ==========================================
+    // STATUS DA CONSULTA
+    // ==========================================
+
+    function setRaceStatus(message, isError = false) {
+
+      const status = document.getElementById('race-status');
+
+      status.textContent = message;
+
+      status.classList.toggle('error', isError);
+
+    }
+
+
+    // ==========================================
+    // CARREGAMENTO DO SVG DO CIRCUITO
+    // ==========================================
+
+    
+function loadCircuitSvg(circuitId, circuitName) {
+
+  const container = document.getElementById('track-container');
+
+  const fileName =
+    CIRCUIT_FILE_NAMES[circuitId] ||
+    circuitId.replaceAll('_', '-');
+
+  const svgUrl =
+    `https://raw.githubusercontent.com/f1db/f1db/main/src/assets/circuits/black-outline/${encodeURIComponent(fileName)}-1.svg`;
+
+  const image = document.createElement('img');
+
+  image.alt = `Traçado do ${circuitName}`;
+  image.loading = 'eager';
+
+  image.onload = () => {
+    container.replaceChildren(image);
+  };
+
+  image.onerror = () => {
+    container.innerHTML = `
+      <p class="track-placeholder">
+        Não foi possível carregar o traçado deste circuito.
+      </p>
+    `;
+    console.error('Erro ao carregar SVG:', svgUrl);
+  };
+
+  container.innerHTML = `
+    <p class="track-placeholder">
+      Carregando traçado do circuito...
+    </p>
+  `;
+
+  // Primeiro coloca a imagem na página.
+  container.replaceChildren(image);
+
+  // Depois inicia o carregamento.
+  image.src = svgUrl;
+}
+
+
+
+    // ==========================================
+    // CONSULTA DA PRÓXIMA CORRIDA NA JOLPICA
+    // ==========================================
+
+    async function loadNextRace() {
+
+      if (window.raceRequestStarted) {
+        return;
+      }
+
+      window.raceRequestStarted = true;
+
+      setRaceStatus(
+        'Buscando os dados atualizados na API Jolpica...'
+      );
+
+      try {
+
+        // Faz a requisição para a API.
+
+        const response = await fetch(API_NEXT_RACE, {
+
+          method: 'GET',
+
+          headers: {
+            'Accept': 'application/json'
+          },
+
+          cache: 'no-store'
+
+        });
+
+        // Verifica se a requisição foi bem-sucedida.
+
+        if (!response.ok) {
+
+          throw new Error(
+            `A API respondeu com HTTP ${response.status}.`
+          );
+
+        }
+
+        // Converte a resposta para JSON.
+
+        const data = await response.json();
+
+        // Acessa os dados da próxima corrida.
+
+        const race =
+          data?.MRData?.RaceTable?.Races?.[0];
+
+        if (!race || !race.Circuit || !race.date) {
+
+          throw new Error(
+            'A API não retornou os dados esperados da próxima corrida.'
+          );
+
+        }
+
+        // Extrai as informações do circuito.
+
+        const circuit = race.Circuit;
+
+        const location = circuit.Location || {};
+
+        const raceName = race.raceName || 'Grande Prêmio';
+
+        const circuitName =
+          circuit.circuitName || 'Circuito não informado';
+
+        const locality =
+          location.locality || 'Local não informado';
+
+        const country = location.country || '';
+
+        // Atualiza as informações na página.
+
+        document.getElementById('race-name').textContent =
+          raceName;
+
+        document.getElementById('race-circuit').textContent =
+          `🏁 ${circuitName}`;
+
+        document.getElementById('race-date').textContent =
+          `📅 ${formatRaceDate(race.date)}`;
+
+        document.getElementById('race-location').textContent =
+          `📍 ${[locality, country].filter(Boolean).join(', ')}`;
+
+        document.getElementById('race-time').textContent =
+          `🕒 ${formatRaceTime(race.date, race.time)}`;
+
+        // Utiliza o circuitId retornado pela API
+        // para carregar o traçado correspondente.
+
+        if (circuit.circuitId) {
+
+          loadCircuitSvg(
+            circuit.circuitId,
+            circuitName
+          );
+
+        } else {
+
+          document.getElementById('track-container').innerHTML = `
+            <p class="track-placeholder">
+              Identificador do circuito não disponível na API.
+            </p>
+          `;
+
+        }
+
+        setRaceStatus(
+          `Dados carregados da temporada ${race.season}, etapa ${race.round}.`
+        );
+
+      } catch (error) {
+
+        console.error(
+          'Erro ao carregar a próxima corrida:',
+          error
+        );
+
+        setRaceStatus(
+          'Não foi possível consultar a próxima corrida. Verifique sua conexão e tente recarregar a página.',
+          true
+        );
+
+        document.getElementById('race-name').textContent =
+          'Corrida indisponível';
+
+        document.getElementById('race-circuit').textContent =
+          'Os dados do circuito não puderam ser carregados.';
+
+        document.getElementById('race-date').textContent =
+          '📅 Data indisponível';
+
+        document.getElementById('race-location').textContent =
+          '📍 Localização indisponível';
+
+        document.getElementById('race-time').textContent =
+          '🕒 Horário indisponível';
+
+        document.getElementById('track-container').innerHTML = `
+          <p class="track-placeholder">
+            O traçado será exibido quando os dados da corrida
+            estiverem disponíveis.
+          </p>
+        `;
+
+        window.raceRequestStarted = false;
+
+      }
+
+    }
+
+
+    // ==========================================
+    // INICIALIZAÇÃO
+    // ==========================================
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      loadNextRace
+    );
+
   </script>
+
 </body>
 </html>
